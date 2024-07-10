@@ -7,5 +7,5 @@ public record MedicalRegistrationData(String name,
                                       String email,
                                       Integer crm,
                                       SpecialtyData specialty,
-                                      AddressData addressData) {
+                                      AddressData address) {
 }

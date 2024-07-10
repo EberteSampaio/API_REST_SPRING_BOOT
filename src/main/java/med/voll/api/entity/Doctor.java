@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.record.doctor.MedicalRegistrationData;
 import med.voll.api.record.doctor.SpecialtyData;
 
 @Table(name = "medicos")
@@ -27,4 +28,11 @@ public class Doctor {
     private Address addressData;
 
 
+    public Doctor(MedicalRegistrationData doctor) {
+        this.name        = doctor.name();
+        this.email       = doctor.email();
+        this.crm         = doctor.crm();
+        this.specialty   = doctor.specialty();
+        this.addressData = new Address(doctor.address());
+    }
 }
