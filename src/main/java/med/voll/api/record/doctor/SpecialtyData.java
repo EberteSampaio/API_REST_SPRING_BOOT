@@ -4,5 +4,5 @@ public enum SpecialtyData {
     ORTOPEDIA,
     CARDIOLOGIA,
     GINECOLOGIA,
-    DERMATOLOGIA;
+    DERMATOLOGIA
 }
