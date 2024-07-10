@@ -1,11 +1,11 @@
 package med.voll.api.record.doctor;
 
 
-import med.voll.api.record.others.Address;
+import med.voll.api.record.others.AddressData;
 
 public record MedicalRegistrationData(String name,
                                       String email,
                                       Integer crm,
-                                      Specialty specialty,
-                                      Address address) {
+                                      SpecialtyData specialty,
+                                      AddressData addressData) {
 }
