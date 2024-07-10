@@ -1,4 +1,4 @@
-package med.voll.api.record.doctor;
+package med.voll.api.record.others;
 
 public record Address(String streetAddress,
                       String neighborhood,
