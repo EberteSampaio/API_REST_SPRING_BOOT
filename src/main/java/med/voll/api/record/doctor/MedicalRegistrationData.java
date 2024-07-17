@@ -17,6 +17,10 @@ public record MedicalRegistrationData(
         @Email(message = "É necessário um e-mail válido!")
         String email,
 
+        @NotBlank(message = "Por favor, preencha o número de telefone!")
+        @Pattern(regexp = "\\d{11,13}",message = "O número de telefone deve ter 13 dígitos!")
+        String phoneNumber,
+
         @NotBlank(message = "Por favor, preencha o crm!")
         @Pattern(regexp = "\\d{4,6}",message = "O crm deve ter entre 4 a 6 dígitos!")
         String crm,
