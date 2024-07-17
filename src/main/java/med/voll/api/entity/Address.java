@@ -13,7 +13,7 @@ import med.voll.api.record.others.AddressData;
 public class Address {
     private String streetAddress;
     private String neighborhood;
-    private Integer zipCode;
+    private String zipCode;
     private String city;
     private String uf;
     private String houseNumber;

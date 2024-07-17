@@ -19,7 +19,7 @@ public class Doctor {
     private Long id;
     private String name;
     private String email;
-    private Integer crm;
+    private String crm;
 
     @Enumerated(EnumType.STRING)
     private SpecialtyData specialty;
