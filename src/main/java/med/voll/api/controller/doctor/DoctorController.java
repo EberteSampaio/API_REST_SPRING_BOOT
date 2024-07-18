@@ -31,7 +31,6 @@ public class DoctorController {
     }
 
     @GetMapping("/all")
-    @Transactional
     public Page<DoctorDataList> all(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
         return this.doctorRepository.findAll(pageable).map(DoctorDataList::new);
     }
