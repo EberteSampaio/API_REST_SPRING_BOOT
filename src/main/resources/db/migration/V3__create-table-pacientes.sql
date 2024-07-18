@@ -3,7 +3,7 @@ CREATE TABLE `pacientes`
     `id`             bigint       NOT NULL AUTO_INCREMENT,
     `name`           varchar(100) NOT NULL,
     `email`          varchar(100) NOT NULL,
-    `phoneNumber`    varchar(13)  NOT NULL,
+    `phone_number`    varchar(13)  NOT NULL,
     `cpf`            varchar(11)  NOT NULL,
     `street_address` varchar(100) NOT NULL,
     `neighborhood`   varchar(100) NOT NULL,
