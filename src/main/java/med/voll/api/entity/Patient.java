@@ -1,14 +1,46 @@
 package med.voll.api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import med.voll.api.record.others.AddressData;
+import jakarta.persistence.*;
+import lombok.*;
+import med.voll.api.record.patient.PatientRegistrationData;
+import med.voll.api.record.patient.PatientUpdateData;
 
-
+@Table(name = "pacientes")
+@Entity(name = "Patient")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Patient {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String email;
     private String phoneNumber;
     private String cpf;
-    private AddressData addressData;
+    @Embedded
+    private Address addressData;
+
+    public Patient(PatientRegistrationData patientData){
+        this.setName(patientData.name());
+        this.setEmail(patientData.email());
+        this.setPhoneNumber(patientData.phoneNumber());
+        this.setCpf(patientData.cpf());
+        this.addressData = new Address(patientData.address());
+    }
+
+    public void updateData(PatientUpdateData patient) {
+        if(patient.name() != null){
+            this.setName(patient.name());
+        }
+
+        if(patient.phoneNumber() != null){
+            this.setPhoneNumber(patient.phoneNumber());
+        }
+
+        if(patient.data() != null){
+            this.getAddressData().updateData(patient.data());
+        }
+    }
 }

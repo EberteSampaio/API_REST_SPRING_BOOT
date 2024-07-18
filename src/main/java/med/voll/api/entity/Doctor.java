@@ -48,7 +48,7 @@ public class Doctor {
         }
 
         if(doctor.address() != null){
-            this.addressData.updateData(doctor.address());
+            this.getAddressData().updateData(doctor.address());
         }
 
     }
