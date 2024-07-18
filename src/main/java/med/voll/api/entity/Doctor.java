@@ -1,16 +1,16 @@
 package med.voll.api.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.Valid;
+import lombok.*;
 import med.voll.api.record.doctor.DoctorRegistrationData;
+import med.voll.api.record.doctor.DoctorUpdateData;
 import med.voll.api.record.doctor.SpecialtyData;
 
 @Table(name = "medicos")
 @Entity(name = "Doctor")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -36,5 +36,20 @@ public class Doctor {
         this.crm         = doctor.crm();
         this.specialty   = doctor.specialty();
         this.addressData = new Address(doctor.address());
+    }
+
+    public void updateData(@Valid DoctorUpdateData doctor) {
+        if(doctor.name() != null){
+            this.setName(doctor.name());
+        }
+
+        if(doctor.phoneNumber() != null){
+            this.setPhoneNumber(doctor.phoneNumber());
+        }
+
+        if(doctor.address() != null){
+            this.addressData.updateData(doctor.address());
+        }
+
     }
 }
