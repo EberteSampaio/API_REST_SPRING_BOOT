@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import med.voll.api.record.others.AddressData;
 
-public record MedicalRegistrationData(
+public record DoctorRegistrationData(
 
         @NotBlank(message = "Por favor, preencha o nome!")
         String name,
