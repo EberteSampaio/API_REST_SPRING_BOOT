@@ -35,7 +35,7 @@ public class PatientController {
 
     @GetMapping("/all")
     public Page<PatientDataList> all(@PageableDefault(size = 10,page = 0,sort = {"name"}) Pageable pageable){
-       return  this.patientRepository.findAll(pageable).map(PatientDataList::new);
+       return  this.patientRepository.findAllByStatusTrue(pageable).map(PatientDataList::new);
     }
 
     @PutMapping("/update")
@@ -53,8 +53,9 @@ public class PatientController {
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
 
         Patient patient = this.patientRepository.getReferenceById(id);
-        this.patientRepository.delete(patient);
 
-        return ResponseEntity.ok("O paciente "+ patient.getName()+ " foi excluído com sucesso!");
+        patient.setStatus(false);
+
+        return ResponseEntity.ok("O paciente "+ patient.getName()+ " foi inativado com sucesso!");
     }
 }

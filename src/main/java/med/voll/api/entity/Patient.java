@@ -21,6 +21,7 @@ public class Patient {
     private String cpf;
     @Embedded
     private Address addressData;
+    private Boolean status;
 
     public Patient(PatientRegistrationData patientData){
         this.setName(patientData.name());
@@ -28,6 +29,7 @@ public class Patient {
         this.setPhoneNumber(patientData.phoneNumber());
         this.setCpf(patientData.cpf());
         this.addressData = new Address(patientData.address());
+        this.setStatus(true);
     }
 
     public void updateData(PatientUpdateData patient) {
