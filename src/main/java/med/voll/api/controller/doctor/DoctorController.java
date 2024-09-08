@@ -3,6 +3,7 @@ package med.voll.api.controller.doctor;
 import jakarta.validation.Valid;
 import med.voll.api.entity.Doctor;
 import med.voll.api.interfaces.repository.DoctorRepository;
+import med.voll.api.record.doctor.DataDetailDoctor;
 import med.voll.api.record.doctor.DoctorDataList;
 import med.voll.api.record.doctor.DoctorRegistrationData;
 import med.voll.api.record.doctor.DoctorUpdateData;
@@ -13,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController
@@ -21,37 +23,47 @@ public class DoctorController {
     @Autowired
     private  DoctorRepository doctorRepository;
 
-    @PostMapping("/create")
+    @PostMapping
     @Transactional
-    public ResponseEntity<String> create(@RequestBody @Valid DoctorRegistrationData doctor ){
-
+    public ResponseEntity<DataDetailDoctor> create(@RequestBody @Valid DoctorRegistrationData doctor, UriComponentsBuilder uriComponentsBuilder){
         Doctor newDoctor = this.doctorRepository.save(new Doctor(doctor));
 
-        return ResponseEntity.ok("O Novo médico "+ newDoctor.getName() +" foi cadastrado com sucesso!");
+        var uri = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(newDoctor.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DataDetailDoctor(newDoctor));
     }
 
-    @GetMapping("/all")
-    public Page<DoctorDataList> all(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
-        return this.doctorRepository.findAllByStatusTrue(pageable).map(DoctorDataList::new);
+    @GetMapping
+    public ResponseEntity<Page<DoctorDataList>> all(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
+        var page = this.doctorRepository.findAllByStatusTrue(pageable).map(DoctorDataList::new);
+
+        return ResponseEntity.ok(page);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @Transactional
-    public ResponseEntity<String> update(@RequestBody @Valid DoctorUpdateData doctorUpdateData){
+    public ResponseEntity<DataDetailDoctor> update(@RequestBody @Valid DoctorUpdateData doctorUpdateData){
         var doctor = this.doctorRepository.getReferenceById(doctorUpdateData.id());
 
         doctor.updateData(doctorUpdateData);
 
-        return ResponseEntity.ok("Os dados do Dr(a). " + doctor.getName() + " foram atualizados com sucesso!");
+        return ResponseEntity.ok(new DataDetailDoctor(doctor));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+    public ResponseEntity delete(@PathVariable("id") Long id){
         var doctor = this.doctorRepository.getReferenceById(id);
 
         doctor.setStatus(false);
 
-        return ResponseEntity.ok("Dados do Dr(a) " + doctor.getName() + " inativados com sucesso!");
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DataDetailDoctor> getById(@PathVariable("id") Long id){
+        var doctor = this.doctorRepository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DataDetailDoctor(doctor));
     }
 }
