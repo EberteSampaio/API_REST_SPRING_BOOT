@@ -32,7 +32,7 @@ public class DoctorController {
 
     @GetMapping("/all")
     public Page<DoctorDataList> all(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
-        return this.doctorRepository.findAll(pageable).map(DoctorDataList::new);
+        return this.doctorRepository.findAllByStatusTrue(pageable).map(DoctorDataList::new);
     }
 
     @PutMapping("/update")
@@ -50,8 +50,8 @@ public class DoctorController {
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         var doctor = this.doctorRepository.getReferenceById(id);
 
-        this.doctorRepository.delete(doctor);
+        doctor.setStatus(false);
 
-        return ResponseEntity.ok("Dados do Dr(a) " + doctor.getName() + " excluidos com sucesso!");
+        return ResponseEntity.ok("Dados do Dr(a) " + doctor.getName() + " inativados com sucesso!");
     }
 }
