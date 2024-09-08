@@ -1,8 +1,6 @@
 package med.voll.api.controller.patient;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
-import med.voll.api.entity.Doctor;
 import med.voll.api.entity.Patient;
 import med.voll.api.interfaces.repository.PatientRepository;
 import med.voll.api.record.patient.PatientDataList;
@@ -16,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("pacientes")
