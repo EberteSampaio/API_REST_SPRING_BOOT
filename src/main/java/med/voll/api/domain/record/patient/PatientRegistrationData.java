@@ -1,11 +1,10 @@
-package med.voll.api.record.patient;
+package med.voll.api.domain.record.patient;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import med.voll.api.record.others.AddressData;
+import med.voll.api.domain.record.others.AddressData;
 
 public record PatientRegistrationData(
         @NotBlank(message = "Por favor, preencha o nome completo!")

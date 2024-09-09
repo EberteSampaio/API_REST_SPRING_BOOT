@@ -1,13 +1,12 @@
 package med.voll.api.controller.patient;
 
 import jakarta.validation.Valid;
-import med.voll.api.entity.Patient;
-import med.voll.api.interfaces.repository.PatientRepository;
-import med.voll.api.record.doctor.DataDetailDoctor;
-import med.voll.api.record.patient.DataDetailPatient;
-import med.voll.api.record.patient.PatientDataList;
-import med.voll.api.record.patient.PatientRegistrationData;
-import med.voll.api.record.patient.PatientUpdateData;
+import med.voll.api.domain.entity.Patient;
+import med.voll.api.domain.repository.PatientRepository;
+import med.voll.api.domain.record.patient.DataDetailPatient;
+import med.voll.api.domain.record.patient.PatientDataList;
+import med.voll.api.domain.record.patient.PatientRegistrationData;
+import med.voll.api.domain.record.patient.PatientUpdateData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

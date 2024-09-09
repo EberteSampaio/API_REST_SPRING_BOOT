@@ -1,11 +1,11 @@
-package med.voll.api.entity;
+package med.voll.api.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
-import med.voll.api.record.doctor.DoctorRegistrationData;
-import med.voll.api.record.doctor.DoctorUpdateData;
-import med.voll.api.record.doctor.SpecialtyData;
+import med.voll.api.domain.record.doctor.DoctorUpdateData;
+import med.voll.api.domain.record.doctor.SpecialtyData;
+import med.voll.api.domain.record.doctor.DoctorRegistrationData;
 
 @Table(name = "medicos")
 @Entity(name = "Doctor")

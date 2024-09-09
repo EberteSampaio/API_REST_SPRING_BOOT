@@ -1,6 +1,6 @@
-package med.voll.api.record.doctor;
+package med.voll.api.domain.record.doctor;
 
-import med.voll.api.entity.Doctor;
+import med.voll.api.domain.entity.Doctor;
 
 public record DoctorDataList(Long id, String name, String email, String crm, SpecialtyData specialtyData) {
 
